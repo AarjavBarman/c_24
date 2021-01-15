@@ -1,49 +1,56 @@
+
 const Engine = Matter.Engine;
-const World= Matter.World;
+const World = Matter.World;
 const Bodies = Matter.Bodies;
+const Body = Matter.Body;
+var dustbin1,dustbin2,dustbin3;
+var ground1;
+var ball1;
 
-var engine, world;
-var box1,box2,box3,box4,box5;
-var pig1,pig2;
-var log1,log2,log3,log4;
-var bird1;
 
-function setup(){
-    var canvas = createCanvas(1200,400);
-    engine = Engine.create();
-    world = engine.world;
-
-    bird1 = new Bird(100,100);
-    box1 = new Box(700,320,70,70);
-    box2 = new Box(920,320,70,70);
-    box3 = new Box(700,240,70,70);
-    box4 = new Box(920,240,70,70);
-    box5 = new Box(810,160,70,70);
-    ground = new Ground(600,height,1200,20);
-    pig1 = new Pig(810,350);
-    pig2 = new Pig(810,220);
-    log1 = new log(810,260,300,PI/2);
-    log2 = new log(810,180,300,PI/2);
-    log3 = new log(760,120,150,PI/7);
-    log4 = new log(870,120,150,PI/-7);
+function preload()
+{
+	
 }
-function draw(){
-    background(0);
-    Engine.update(engine);
-    console.log(box2.body.position.x);
-    console.log(box2.body.position.y);
-    console.log(box2.body.angle);
-    bird1.display();
-    box1.display();
-    box2.display();
-    box3.display();
-    box4.display();
-    box5.display();
-    pig1.display();
-    pig2.display();
-    log1.display();
-    log2.display();
-    log3.display();
-    log4.display();
-    ground.display();
+
+function setup() {
+	createCanvas(1200, 700);
+
+
+	engine = Engine.create();
+	world = engine.world;
+	
+	
+
+	//Create the Bodies Here.
+	ball1 = new Ball(200,200,15);
+	dustbin1 = new Dustbin(780,550,20,100);
+	dustbin2 = new Dustbin(865,650,150,20);
+	dustbin3 = new Dustbin(930,550,20,100);
+
+	ground1 = new ground(600,680,1200,20);
+	Engine.run(engine);
+  
 }
+
+
+function draw() {
+  Engine.update(engine);
+  background("black");
+  
+  rectMode(CENTER);
+  ball1.display();
+  dustbin1.display();
+  dustbin2.display();
+  dustbin3.display();
+  ground1.display();
+  drawSprites();
+ 
+}
+
+function key_pressed(){
+if (keyCode === UP_ARROW){
+Matter.Body.applyForce(ball1.body,ball1.body.position,{x:40,y:-30})	
+}	
+}
+

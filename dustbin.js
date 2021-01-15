@@ -1,4 +1,4 @@
-class ground{
+class Dustbin{
     constructor(x,y,width,height){
         var ground_options ={
             isStatic: true
@@ -12,7 +12,7 @@ class ground{
     display(){
         var pos=this.body.position;
         rectMode(CENTER);
-        fill("white");
+        fill("red");
     rect(pos.x,pos.y,this.width,this.height);
   
     }
